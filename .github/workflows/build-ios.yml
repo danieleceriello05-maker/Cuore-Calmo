@@ -31,7 +31,7 @@ jobs:
 
     - name: Compila App iOS (No-Sign / Simulator)
       run: |
-        xcodebuild -workspace ios/App/App.xcworkspace \
+        xcodebuild -workspace ios/App/App.xcodeproj/project.xcworkspace \
                    -scheme App \
                    -sdk iphonesimulator \
                    -configuration Release \

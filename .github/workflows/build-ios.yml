@@ -32,6 +32,7 @@ jobs:
     - name: Crea Archivio iOS
       run: |
         xcodebuild -workspace ios/App/App.xcodeproj/project.xcworkspace \
+                   -configuration Release
                    -scheme App \
                    -destination 'generic/platform=iOS' \
                    -archivePath build/App.xcarchive \

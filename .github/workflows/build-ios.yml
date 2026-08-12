@@ -29,7 +29,7 @@ jobs:
     - name: Seleziona Xcode corretto
       run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
-     - name: Crea Archivio iOS
+    - name: Crea Archivio iOS
       run: |
         xcodebuild -workspace ios/project.xcworkspace \
                    -scheme App \
@@ -48,4 +48,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ios-app-build
-        path: ios/App/DerivedData/Build/Products/Release-iphonesimulator/App.app
+        path: ios/App/DerivedData/Build/build/ios/*.ipa

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuore Calmo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="img/logo.png">
+    <script src="js/vendor/pdf.min.js"></script>
+    <script src="js/lettere-offline.js"></script>
+    <script src="js/app-resp.js"></script>
+    <script src="js/app-parla.js"></script>
+    <script src="js/app-sound.js"></script>
+    <script src="js/app-lettere.js"></script>
+    <script src="js/app-diario.js"></script>
+</head>
+<body>
+
+    <div class="phone-container">
+        
+        <!-- Header -->
+        <div class="header-box">
+            <h1>Ciao Amore Mio</h1>
+            <p>Va tutto bene. Un passo alla volta.</p>
+            <div class="badge">Con te, per sempre❤️</div>
+        </div>
+
+        <!-- App parla con me -->
+        <div class="bar-button" onclick="avviaChat()">
+            <div class="bar-content">
+                <div class="icon-circle">💬</div>
+                <div class="bar-text">
+                    <h3>Parla con me</h3>
+                    <p>Troviamo la calma insieme</p>
+                </div>
+            </div>
+            <div style="font-size: 20px;">➔</div>
+        </div>
+
+        <!-- Griglia Funzioni -->
+        <div class="grid-container">
+            
+            <div class="card card-respira" onclick="avviaRespiro()">
+                <div class="card-icon">🌬️</div>
+                <div class="card-info">
+                    <h4>Respira</h4>
+                    <p>Tecnica 4 - 7 - 8</p>
+                </div>
+            </div>
+
+            <div class="card card-lettere" onclick="avviaLettere()">
+                <div class="card-icon">✉️</div>
+                <div class="card-info">
+                    <h4>Lettere per te</h4>
+                    <p>Da chi ti ama</p>
+                </div>
+            </div>
+
+            <div class="card card-diario" onclick="avviaDiario()">
+                <div class="card-icon">📖</div>
+                <div class="card-info">
+                    <h4>Il mio diario</h4>
+                    <p>Annota come stai</p>
+                </div>
+            </div>
+
+            <div class="card card-suoni" onclick="avviaSuoni()">
+                <div class="card-icon">🎵</div>
+                <div class="card-info">
+                    <h4>Suoni</h4>
+                    <p>Per rilassarti</p>
+                </div>
+            </div>
+
+            <!-- App Diario -->
+            <div id="diaryOverlay" class="diary-overlay">
+                <div class="diary-header">
+                    <h2>Il mio diario 📖</h2>
+                    <button class="close-btn" onclick="chiudiDiario()">Esci</button>
+                </div>
+                
+                <div class="diary-content">
+                    <!-- Area di testo programmata per salvare ad ogni lettera digitata -->
+                    <textarea id="diaryInput" class="diary-textarea" placeholder="Scrivi qui come ti senti, sfogati pure... Io sono qui ad ascoltarti." oninput="salvaDiario()"></textarea>
+                    <div id="saveStatus" class="save-status">Tutto salvato in locale</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+   
+
+    <!-- App di Respirazione -->
+    <div id="breathOverlay" class="overlay">
+        <div id="breathText" class="breath-text">Pronta?</div>
+        <div id="breathCircle" class="breath-circle"></div>
+        <div id="breathTimer" class="breath-timer">0</div>
+        <button class="close-btn" onclick="chiudiRespiro()">Chiudi</button>
+    </div>
+    <!-- App parla con me -->
+    <div id="chatOverlay" class="chat-overlay">
+        <div class="chat-header">
+            <h2>Parla con me 💬</h2>
+            <button class="close-btn" onclick="chiudiChat()">Esci</button>
+        </div>
+        
+        <!-- Area dove appariranno i messaggi -->
+        <div id="chatMessages" class="chat-messages"></div>
+        
+        <!-- Area dove caricheremo le risposte cliccabili -->
+        <div id="chatOptions" class="chat-options"></div>
+    </div>
+
+    <!-- App Suoni -->
+    <div id="audioOverlay" class="audio-overlay">
+        <div class="audio-header">
+            <h2>Suoni per rilassarti 🎵</h2>
+            <button class="close-btn" onclick="chiudiSuoni()">Esci</button>
+        </div>
+        
+        <div class="audio-list">
+            
+            <!-- Traccia 1 -->
+            <div class="audio-track">
+                <div class="track-info">
+                    <div class="track-icon">🍀</div>
+                    <div class="track-name">
+                        <h3>La fortuna che ho</h3>
+                        <p>Canzone creata appositamente per celebbrare il nostro primo anno di fidanzamento</p>
+                    </div>
+                </div>
+                <button class="play-btn" id="btn-fortuna" onclick="toggleAudio('fortuna')">▶</button>
+            </div>
+
+            <!-- Traccia 2-->
+            <div class="audio-track">
+                <div class="track-info">
+                    <div class="track-icon">❤️</div>
+                    <div class="track-name">
+                        <h3>La fortuna che ho - Base</h3>
+                        <p>Canzone creata per festeggiare il nostro primo anno di fidanzamento, stavolta senza voce.</p>
+                    </div>
+                </div>
+                <button class="play-btn" id="btn-fortunabase" onclick="toggleAudio('fortunabase')">▶</button>
+            </div>
+
+            <!-- Traccia 3-->
+            <div class="audio-track">
+                <div class="track-info">
+                    <div class="track-icon">🎤</div>
+                    <div class="track-name">
+                        <h3>Voce di Daniele</h3>
+                        <p>Un mio messaggio vocale per te, amore mio. Ascoltalo quando vuoi. così potrai sentire la mia voce ogni volta che ne avrai bisogno.</p>
+                    </div>
+                </div>
+                <button class="play-btn" id="btn-dany" onclick="toggleAudio('dany')">▶</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- App Lettere -->
+<div id="lettersOverlay" class="letters-overlay">
+    <div class="letters-header">
+        <h2>Lettere per te ✉️</h2>
+        <button class="close-btn" onclick="chiudiLettere()">Esci</button>
+    </div>
+    
+    <div class="letters-content">
+        <!-- Bottone per tornare all'elenco delle lettere -->
+        <button id="backToGridBtn" class="back-to-grid-btn" onclick="mostraGrigliaLettere()">← Torna all'elenco</button>
+
+        <!-- Contenitore dell'elenco -->
+        <div id="lettersGrid" class="letters-grid">
+            <!-- Esempio di 3 lettere. Puoi aggiungerne quante ne vuoi modificando il numero del file -->
+            <div class="letter-thumb" onclick="caricaLetteraDaPDF('lettere/1.pdf', 'La prima lettera d\'amore')">
+                <div class="icon">💝</div>
+                <div class="title">La prima lettera d'amore</div>
+            </div>
+            <div class="letter-thumb" onclick="caricaLetteraDaPDF('lettere/2.pdf', 'Lettera di Natale')">
+                <div class="icon">🌸</div>
+                <div class="title">Lettera di Natale</div>
+            </div>
+            <div class="letter-thumb" onclick="caricaLetteraDaPDF('lettere/3.pdf', 'Lettera di San Valentino')">
+                <div class="icon">✨</div>
+                <div class="title">Lettera di San Valentino</div>
+            </div>
+            <div class="letter-thumb" onclick="caricaLetteraDaPDF('lettere/4.pdf', 'Lettera per la Cresima')">
+                <div class="icon">🌟</div>
+                <div class="title">Lettera per la Cresima</div>
+            </div>
+            <div class="letter-thumb" onclick="caricaLetteraDaPDF('lettere/5.pdf', 'Celebrazione del 1° Anno d\'Amore')">
+                <div class="icon">💕</div>
+                <div class="title">Celebrazione del 1° Anno d'Amore</div>
+            </div>
+            <div class="letter-thumb" onclick="caricaLetteraDaPDF('lettere/6.pdf', 'Ti presento Cuore Calmo')">
+                <div class="icon">❤️</div>
+                <div class="title">Ti presento Cuore Calmo</div>
+            </div>
+        </div>
+
+        <div id="letterTitle" class="letter-title">Titolo lettera</div>
+
+        <!-- Il foglio di carta che mostrerà il testo estratto dal PDF -->
+        <div id="letterPaper" class="letter-paper">Seleziona una lettera per leggerla...</div>
+    </div>
+</div>
+
+</body>
+</html>

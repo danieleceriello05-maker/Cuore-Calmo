@@ -1,0 +1,643 @@
+/* CSS index di base app Cuore Calmo */
+:root {
+--app-bg: #f4fbff;
+--app-surface: #ffffff;
+--app-soft: #e6f2ff;
+--app-soft-2: #ffd6d6;
+--app-accent: #d9534f;
+--app-text: #333333;
+--app-muted: #666666;
+--app-border: #e6f2ff;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+background-color: var(--app-bg);
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+padding: 20px;
+}
+
+.phone-container {
+width: 100%;
+max-width: 412px;
+background: #fff;
+border-radius: 40px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+padding: 24px;
+display: flex;
+flex-direction: column;
+gap: 16px;
+overflow: hidden;
+}
+
+/* Header Principale */
+.header-box {
+background: linear-gradient(135deg, #e6f2ff 0%, #ffd6d6 100%); /* azzurro -> rosso chiaro */
+padding: 30px 20px;
+border-radius: 28px;
+color: #333;
+}
+
+.header-box h1 {
+font-size: 32px;
+font-weight: 600;
+margin-bottom: 8px;
+}
+
+.header-box p {
+font-size: 16px;
+opacity: 0.8;
+margin-bottom: 16px;
+}
+
+.badge {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+background: rgba(255, 255, 255, 0.6);
+padding: 6px 14px;
+border-radius: 20px;
+font-size: 14px;
+color: #d9534f; /* rosso */
+font-weight: bold;
+}
+
+/* Barra Parla con me */
+.bar-button {
+background-color: #d9534f; /* rosso */
+color: white;
+padding: 18px;
+border-radius: 24px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+text-decoration: none;
+cursor: pointer;
+transition: transform 0.2s;
+}
+.bar-button:active { transform: scale(0.98); }
+
+.bar-content { display: flex; align-items: center; gap: 14px; }
+.icon-circle {
+background: rgba(255,255,255,0.3);
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 20px;
+}
+.bar-text h3 { font-size: 18px; font-weight: 600; margin-bottom: 2px;}
+.bar-text p { font-size: 13px; opacity: 0.9; }
+
+/* Griglia delle Card */
+.grid-container {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 14px;
+}
+
+.card {
+border-radius: 24px;
+padding: 20px;
+display: flex;
+flex-direction: column;
+gap: 12px;
+cursor: pointer;
+transition: transform 0.2s;
+}
+.card:active { transform: scale(0.97); }
+
+.card-icon {
+width: 36px;
+height: 36px;
+border-radius: 50%;
+background: rgba(255,255,255,0.5);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 18px;
+}
+
+.card-info h4 { font-size: 16px; color: #333; margin-bottom: 4px; }
+.card-info p { font-size: 12px; color: #666; }
+
+/* Colori Card */
+.card-respira { background-color: #e6f7ff; } /* azzurro chiaro */
+.card-lettere { background-color: #ffe6e6; } /* rosato chiaro */
+.card-diario { background-color: #eaf6ff; } /* altro azzurro chiaro */
+.card-suoni { background-color: #dff4ff; } /* azzurro delicato */
+
+/* ----------------------App di Respirazione a tutto schermo------------------------ */
+.overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(244, 251, 255, 0.98); /* leggero azzurro */
+display: none; /* Nascosta di default */
+flex-direction: column;
+justify-content: center;
+align-items: center;
+z-index: 1000;
+gap: 40px;
+padding: 20px;
+}
+
+/* Il cerchio che si animerà */
+.breath-circle {
+width: 150px;
+height: 150px;
+background: linear-gradient(135deg, #e6f2ff 0%, #ffd6d6 100%);
+border-radius: 50%;
+box-shadow: 0 10px 30px rgba(217, 83, 79, 0.12);
+transition: transform 1s linear; /* Transizione fluida gestita da JS */
+}
+
+.breath-text {
+font-size: 24px;
+font-weight: 600;
+color: #333;
+text-align: center;
+min-height: 36px;
+}
+
+.breath-timer {
+font-size: 48px;
+font-weight: bold;
+color: #d9534f; /* rosso */
+}
+
+.close-btn {
+background: #f0f0f0;
+border: none;
+padding: 10px 20px;
+border-radius: 20px;
+cursor: pointer;
+font-weight: 600;
+color: #666;
+}
+/* ----------------------App parla con me a tutto schermo------------------------ */
+.chat-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: var(--app-bg);
+display: none; /* Nascosta inizialmente */
+flex-direction: column;
+z-index: 1001;
+}
+
+.chat-header {
+background: linear-gradient(135deg, var(--app-soft) 0%, var(--app-soft-2) 100%);
+padding: 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid #f3c7c7;
+}
+
+.chat-header h2 {
+font-size: 20px;
+color: #333;
+}
+
+/* Area dei messaggi della chat */
+.chat-messages {
+flex: 1;
+padding: 20px;
+overflow-y: auto;
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
+
+/* Stile delle nuvolette (i messaggi) */
+.chat-message-row {
+display: flex;
+align-items: flex-end;
+gap: 8px;
+max-width: 100%;
+}
+
+.chat-message-row.bot {
+justify-content: flex-start;
+}
+
+.chat-message-row.user {
+justify-content: flex-end;
+}
+
+.chat-avatar {
+width: 36px;
+height: 36px;
+border-radius: 50%;
+overflow: hidden;
+border: 2px solid #ffd6d6;
+box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+flex-shrink: 0;
+background-color: #fff;
+}
+
+.chat-avatar img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+
+.msg {
+max-width: 80%;
+padding: 14px 18px;
+border-radius: 20px;
+font-size: 15px;
+line-height: 1.4;
+animation: compari 0.3s ease;
+}
+
+.msg.bot {
+background-color: #fff;
+color: #333;
+align-self: flex-start;
+border-bottom-left-radius: 4px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+border: 1px solid #ffd6d6;
+}
+
+.msg.user {
+background-color: #d9534f; /* rosso */
+color: white;
+align-self: flex-end;
+border-bottom-right-radius: 4px;
+}
+
+/* Area dei pulsanti di risposta */
+.chat-options {
+padding: 20px;
+background-color: var(--app-bg);
+display: flex;
+flex-direction: column;
+gap: 10px;
+border-top: 1px solid var(--app-border);
+}
+
+.opt-btn {
+background-color: var(--app-soft);
+border: 2px solid #dfefff;
+color: #134e6f;
+padding: 14px;
+border-radius: 16px;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+text-align: center;
+transition: all 0.2s;
+}
+
+.opt-btn:active {
+transform: scale(0.98);
+}
+
+@keyframes compari {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* ----------------------App Suoni------------------------ */
+.audio-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: var(--app-bg);
+display: none;
+flex-direction: column;
+z-index: 1002;
+}
+
+.audio-header {
+background: linear-gradient(135deg, var(--app-soft) 0%, var(--app-soft-2) 100%);
+padding: 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid #f3c7c7;
+}
+
+.audio-list {
+flex: 1;
+padding: 24px;
+display: flex;
+flex-direction: column;
+gap: 16px;
+overflow-y: auto;
+}
+
+/* Stile della singola riga audio */
+.audio-track {
+background: var(--app-surface);
+padding: 18px;
+border-radius: 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+border: 1px solid var(--app-border);
+}
+
+.track-info {
+display: flex;
+align-items: center;
+gap: 14px;
+}
+
+.track-icon {
+font-size: 24px;
+}
+
+.track-name h3 {
+font-size: 16px;
+color: #333;
+margin-bottom: 2px;
+}
+
+.track-name p {
+font-size: 12px;
+color: #777;
+}
+
+/* Pulsante Play/Pause */
+.play-btn {
+background: var(--app-soft);
+border: none;
+width: 44px;
+height: 44px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 16px;
+cursor: pointer;
+color: var(--app-accent);
+font-weight: bold;
+transition: all 0.2s;
+}
+
+.play-btn.playing {
+background: var(--app-accent);
+color: #fff;
+}
+/* ----------------------App Diario------------------------ */
+.diary-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: var(--app-bg);
+display: none;
+flex-direction: column;
+z-index: 1003;
+}
+
+.diary-header {
+background: linear-gradient(135deg, var(--app-soft) 0%, var(--app-soft-2) 100%);
+padding: 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid #f3c7c7;
+}
+
+.diary-content {
+flex: 1;
+padding: 20px;
+display: flex;
+flex-direction: column;
+gap: 16px;
+}
+
+/* L'area di testo dove scrivere */
+.diary-textarea {
+width: 100%;
+flex: 1;
+background: var(--app-surface);
+border: 1px solid var(--app-border);
+border-radius: 18px;
+resize: none;
+font-size: 16px;
+line-height: 1.6;
+color: var(--app-text);
+outline: none;
+padding: 14px 16px;
+}
+
+/* Messaggio di salvataggio automatico */
+.save-status {
+font-size: 13px;
+color: var(--app-accent);
+font-style: italic;
+text-align: right;
+padding: 8px 0;
+}
+
+/* ----------------------App Lettere------------------------ */
+.letters-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: #fffcfd;
+display: none;
+flex-direction: column;
+z-index: 1004;
+}
+
+.letters-header {
+background: #ffe5e8;
+padding: 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid #ffd0de;
+}
+
+.letters-content {
+flex: 1;
+padding: 24px;
+overflow-y: auto;
+display: flex;
+flex-direction: column;
+gap: 20px;
+}
+
+/* Griglia con i pulsanti delle lettere disponibili */
+.letters-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+gap: 14px;
+}
+
+.letter-thumb {
+position: relative;
+overflow: hidden;
+background: linear-gradient(135deg, #fff7fa 0%, #ffeef2 100%);
+border: 1px solid #ffd9e3;
+padding: 18px 12px;
+border-radius: 20px;
+text-align: center;
+cursor: pointer;
+box-shadow: 0 8px 24px rgba(222, 107, 138, 0.12);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.letter-thumb::before {
+content: '✿';
+position: absolute;
+top: 8px;
+right: 10px;
+font-size: 16px;
+color: #f2a4b8;
+opacity: 0.8;
+}
+
+.letter-thumb:hover {
+transform: translateY(-2px);
+box-shadow: 0 12px 28px rgba(222, 107, 138, 0.18);
+}
+
+.letter-thumb:active { transform: scale(0.95); }
+.letter-thumb .icon {
+font-size: 24px;
+margin-bottom: 8px;
+background: #fff;
+border-radius: 999px;
+padding: 8px;
+width: 44px;
+height: 44px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0 4px 12px rgba(222, 107, 138, 0.12);
+}
+.letter-thumb .title {
+font-size: 13px;
+font-weight: 700;
+color: #8f4f63;
+}
+
+/* Il foglio dove viene mostrato il testo del PDF */
+.letter-title {
+display: none;
+text-align: center;
+font-size: 18px;
+font-weight: 700;
+color: #de6b8a;
+margin-bottom: 8px;
+letter-spacing: 0.02em;
+}
+
+.letter-paper {
+background: linear-gradient(135deg, #fffdfd 0%, #fff5f7 100%);
+border: 1px solid #ffd9e3;
+padding: 24px;
+border-radius: 24px;
+box-shadow: 0 10px 28px rgba(222, 107, 138, 0.12);
+min-height: 200px;
+display: none; /* Nascosto finché non si sceglie una lettera */
+line-height: 1.7;
+color: #5f4e56;
+font-size: 15px;
+white-space: normal;
+word-break: break-word;
+overflow-wrap: anywhere;
+text-align: left;
+max-width: 100%;
+box-sizing: border-box;
+overflow: hidden;
+}
+
+.letter-paper-content {
+font-family: 'Georgia', 'Times New Roman', serif;
+color: #5f4e56;
+line-height: 1.65;
+padding: 6px 2px;
+max-width: 100%;
+width: 100%;
+box-sizing: border-box;
+overflow-wrap: anywhere;
+word-break: break-word;
+white-space: normal;
+}
+
+.letter-paper-content p {
+margin: 0 0 14px;
+white-space: pre-wrap;
+max-width: 100%;
+width: 100%;
+box-sizing: border-box;
+overflow-wrap: anywhere;
+word-break: break-word;
+}
+
+.letter-paper-paragraph {
+text-align: justify;
+}
+
+.letter-paper-heading {
+font-size: 20px;
+font-weight: 700;
+color: #de6b8a;
+margin: 0 0 16px;
+letter-spacing: 0.03em;
+}
+
+.letter-paper-signoff {
+margin-top: 24px;
+font-style: italic;
+color: #8f4f63;
+white-space: pre-wrap;
+}
+
+.letter-paper-empty {
+font-style: italic;
+color: #9b6b76;
+}
+
+.letter-pdf-frame {
+width: 100%;
+min-height: 70vh;
+border: none;
+border-radius: 16px;
+background: #fff;
+box-shadow: inset 0 0 0 1px rgba(222, 107, 138, 0.12);
+}
+
+.back-to-grid-btn {
+background: #ffe5e8;
+border: none;
+padding: 8px 16px;
+border-radius: 14px;
+font-size: 13px;
+font-weight: 600;
+color: #de6b8a;
+cursor: pointer;
+margin-bottom: 12px;
+align-self: flex-start;
+display: none;
+}

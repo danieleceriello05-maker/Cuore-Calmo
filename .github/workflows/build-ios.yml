@@ -29,15 +29,12 @@ jobs:
     - name: Seleziona Xcode corretto
       run: sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
-    - name: Compila per Simulatore
-      run: xcodebuild -workspace ios/App/App.xcworkspace -scheme App -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' build
-
-    - name: Esporta .ipa
+    - name: Compila per Simulatore e archivia
       run: |
-        xcodebuild -exportArchive \
-                   -archivePath build/App.xcarchive \
-                   -exportPath build/ios \
-                   -exportOptionsPlist ios/App/ExportOptions.plist
+            xcodebuild -workspace ios/App/App.xcwodeproj/project.xcworkspace -scheme App -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' build
+            mkdir -p Payload
+            cp -R build/Release-iphonesimulator/App.app Payload/
+            zip -r App.ipa Payload
 
     - name: Carica l'artefatto
       uses: actions/upload-artifact@v4

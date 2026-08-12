@@ -33,7 +33,7 @@ jobs:
       run: |
         xcodebuild -workspace ios/App/App.xcodeproj/project.xcworkspace \
                    -configuration Release
-                   -scheme App \
+                   -scheme App
                    -destination 'generic/platform=iOS' \
                    -archivePath build/App.xcarchive \
                    archive

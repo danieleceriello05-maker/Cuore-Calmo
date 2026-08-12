@@ -1,0 +1,42 @@
+name: Build iOS App
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout del codice
+      uses: actions/checkout@v4
+
+    - name: Configura Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    - name: Installa dipendenze
+      run: npm install
+
+    - name: Sincronizza Capacitor
+      run: |
+        npx cap copy
+        npx cap sync ios
+
+    - name: Compila App iOS (No-Sign / Simulator)
+      run: |
+        xcodebuild -workspace ios/App/App.xcworkspace \
+                   -scheme App \
+                   -sdk iphonesimulator \
+                   -configuration Release \
+                   CODE_SIGNING_ALLOWED=NO \
+                   build
+
+    - name: Carica l'artefatto
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-app-build
+        path: ios/App/DerivedData/Build/Products/Release-iphonesimulator/App.app

@@ -35,7 +35,7 @@ jobs:
       run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
     - name: Verifica destinazioni valide
-      run: xcodebuild -showdestinations -workspace ios/App/App.xcodeproj/project.xcworkspace
+      run: xcodebuild -showdestinations -workspace ios/App/App.xcodeproj/project.xcworkspace -scheme App
 
     - name: Compila per Simulatore e archivia
       run: |

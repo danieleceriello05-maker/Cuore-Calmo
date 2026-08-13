@@ -29,7 +29,6 @@ L'applicazione raccoglie una serie di strumenti pratici, guidati e multimediali 
 L'applicazione è sviluppata per funzionare **al 100% offline**:
 * Nessun dato o testo del diario viene inviato a server esterni (totale privacy).
 * Gli audio e la logica delle funzioni sono memorizzati sul dispositivo.
-* Può essere salvata sulla schermata Home dell'iPhone o di qualsiasi smartphone Android come **PWA (Progressive Web App)**, comportandosi come un'app nativa a schermo intero.
 
 ---
 

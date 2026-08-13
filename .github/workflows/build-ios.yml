@@ -34,8 +34,8 @@ jobs:
     - name: Pulisci la cache di build
       run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
-    - name: Elenca destinazioni disponibili
-      run: xcodebuild -list -workspace ios/App/App.xcodeproj/project.xcworkspace
+    - name: Verifica destinazioni valide
+      run: xcodebuild -showdestinations -workspace ios/App/App.xcodeproj/project.xcworkspace
 
     - name: Compila per Simulatore e archivia
       run: |

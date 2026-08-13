@@ -41,8 +41,7 @@ jobs:
             mkdir -p Payload
             cp -R build/Release-iphonesimulator/App.app Payload/
             zip -r App.ipa Payload
-    - name: Verifica il contenuto della cartella di build
-      run: ls -R build/Release-iPhoneSimulator/
+
 
     - name: Carica l'artefatto
       uses: actions/upload-artifact@v4

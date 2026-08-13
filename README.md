@@ -18,7 +18,7 @@ L'applicazione raccoglie una serie di strumenti pratici, guidati e multimediali 
 
 * **💬 Parla con me (Conversazione Guidata):** Un bot interattivo basato su risposte a scelta multipla. Guida passo passo la persona attraverso domande dolci e rassicuranti, offrendo grounding visivo e distrazione senza richiedere la fatica di digitare testo durante un momento di crisi.
 * **🌬️ Respira (Tecnica 4 - 7 - 8):** Un esercizio di respirazione guidato visivamente da un cerchio che si espande e si rimpicciolisce a tempo. Segue la tecnica scientifica *4-7-8* (4s inspirazione, 7s trattenimento, 8s espirazione) con timer e indicazioni a schermo.
-* **🌧️ Suoni per Rilassarti:** Una raccolta di traccie audio in *loop* (pioggia, rumore bianco, suoni della natura) pensate per isolare i rumori esterni e favorire il rilassamento.
+* **🌧️ Suoni per Rilassarti:** Una raccolta di traccie audio (La Fortuna che ho, La Fortuna che ho - Base, La mia voce) pensate per isolare i rumori esterni e favorire il rilassamento.
 * **✉️ Lettere per te:** Una sezione dedicata ai ricordi e all'affetto. L'app legge ed estrae in tempo reale il testo dai file `.pdf` inseriti nella cartella locale `lettere/`, mostrandoli con uno stile grafico che ricorda un foglio di carta.
 * **📖 Il mio diario:** Uno spazio privato per sfogarsi e annotare i propri pensieri. I testi vengono salvati in automatico nella memoria locale del dispositivo (`localStorage`), garantendo privacy assoluta e salvataggio in tempo reale.
 
@@ -38,3 +38,4 @@ L'applicazione è sviluppata per funzionare **al 100% offline**:
 * **CSS3:** Design responsive con palette colori custom, animazioni fluide e interfacce a schede (cards).
 * **JavaScript:** Gestione di timer, audio, navigazione ad albero logico e salvataggio locale.
 * **[PDF.js](https://mozilla.github.org/pdf.js/):** Libreria per l'estrazione e il rendering del testo dai file PDF in locale.
+* **Github Action:** Utilizzato per compilare l'app con il formato `.ipa ` installabile su iOS.

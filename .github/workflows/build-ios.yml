@@ -46,13 +46,13 @@ jobs:
 
     - name: Prepara ed impacchetta IPA
       run: |
-          mkdir -p Payload
-          cp -r build/Debug-iphonesimulator/App.app Payload/
-          zip -r App.ipa Payload
+        mkdir -p Payload
+        cp -r build/Debug-iphonesimulator/App.app Payload/
+        zip -r App.ipa Payload
+          
       
-      
-          - name: Carica l'artefatto
-            uses: actions/upload-artifact@v4
-            with:
-              name: ios-app-build
-              path: ios/App/DerivedData/Build/build/ios/*.ipa
+    - name: Carica l'artefatto
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-app-build
+        path: ios/App/DerivedData/Build/build/ios/*.ipa

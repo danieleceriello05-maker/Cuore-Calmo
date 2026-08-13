@@ -51,18 +51,13 @@ jobs:
         cp -r build/Debug-iphonesimulator/App.app Payload/
         zip -r App.ipa Payload
           
-      
-    - name: Trova e rinomina l'IPA
+    - name: Debug - Cerca file IPA ovunque
       run: |
-            IPA_PATH=$(find ios -name "*.ipa" -print -quit)
-            if [ -n "$IPA_PATH" ]; then
-              mv "$IPA_PATH" cuore-calmo.ipa
-              echo "File spostato con successo in cuore-calmo.ipa"
-            else
-              echo "ERRORE: Nessun file .ipa trovato!"
-              exit 1
-            fi
-    
+        echo "=== Ricerca file .ipa ==="
+        find . -name "*.ipa"
+        echo "=== Contenuto cartella corrente ==="
+        ls -la
+        
     - name: Carica l'IPA su GitHub
       uses: actions/upload-artifact@v4
       with:

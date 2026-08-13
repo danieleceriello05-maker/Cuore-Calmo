@@ -10,6 +10,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
+    - name: Rimuovi la cartella di testing
+      run: rm -rf build/release-iPhoneSimulator
+      
     - name: Checkout del codice
       uses: actions/checkout@v4
 

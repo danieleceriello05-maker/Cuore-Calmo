@@ -39,7 +39,7 @@ jobs:
 
     - name: Compila per Simulatore e archivia
       run: |
-            xcodebuild -workspace ios/App/App.xcodeproj/project.xcworkspace -scheme App -destination 'platform=iOS Simulator,name=iPhone 16' build
+            xcodebuild -workspace ios/App/App.xcodeproj/project.xcworkspace -scheme App -destination 'generic/platform=iOS Simulator' build
             mkdir -p Payload
             cp -R build/Release-iphonesimulator/App.app Payload/
             zip -r App.ipa Payload

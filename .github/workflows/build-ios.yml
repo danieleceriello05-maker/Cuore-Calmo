@@ -52,11 +52,19 @@ jobs:
         zip -r App.ipa Payload
           
       
-    - name: Rinomina l'IPA in cuore-calmo.ipa
-      run: mv ios/App/DerivedData/Build/build/ios/*.ipa ios/App/DerivedData/Build/build/ios/cuore-calmo.ipa
-
+    - name: Trova e rinomina l'IPA
+      run: |
+            IPA_PATH=$(find ios -name "*.ipa" -print -quit)
+            if [ -n "$IPA_PATH" ]; then
+              mv "$IPA_PATH" cuore-calmo.ipa
+              echo "File spostato con successo in cuore-calmo.ipa"
+            else
+              echo "ERRORE: Nessun file .ipa trovato!"
+              exit 1
+            fi
+    
     - name: Carica l'IPA su GitHub
       uses: actions/upload-artifact@v4
       with:
-        name: CuoreCalmo-IPA
-        path: ios/App/DerivedData/Build/build/ios/cuore-calmo.ipa
+            name: CuoreCalmo-IPA
+            path: cuore-calmo.ipa

@@ -26,17 +26,17 @@ jobs:
         npx cap copy
         npx cap sync ios
 
-    - name: Imposta Xcode 16
+    - name: Imposta Xcode 26.6
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '16.2'
+        xcode-version: '26.6'
 
     - name: Pulisci la cache di build
       run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
     - name: Compila per Simulatore e archivia
       run: |
-            xcodebuild -workspace ios/App/App.xcodeproj/project.xcworkspace -scheme App -destination 'platform=iOS Simulator,name=iPhone 16,OS=18.0' build
+            xcodebuild -workspace ios/App/App.xcodeproj/project.xcworkspace -scheme App -destination 'platform=iOS Simulator,name=iPhone 16,OS=26.6' build
             mkdir -p Payload
             cp -R build/Release-iphonesimulator/App.app Payload/
             zip -r App.ipa Payload

@@ -38,6 +38,3 @@ L'applicazione è sviluppata per funzionare **al 100% offline**:
 * **CSS3:** Design responsive con palette colori custom, animazioni fluide e interfacce a schede (cards).
 * **JavaScript (Vanilla):** Gestione di timer, audio, navigazione ad albero logico e salvataggio locale.
 * **[PDF.js](https://mozilla.github.org/pdf.js/):** Libreria per l'estrazione e il rendering del testo dai file PDF in locale.
-    ├── 1.pdf
-    ├── 2.pdf
-    └── 3.pdf

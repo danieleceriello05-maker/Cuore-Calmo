@@ -57,5 +57,5 @@ jobs:
     - name: Carica l'IPA su GitHub
       uses: actions/upload-artifact@v4
       with:
-            name: CuoreCalmo-IPA
+            name: CuoreCalmo
             path: cuore-calmo.ipa

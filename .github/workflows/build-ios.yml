@@ -52,14 +52,11 @@ jobs:
         zip -r App.ipa Payload
           
       
-    - name: Carica l'artefatto
-      uses: actions/upload-artifact@v4
-      with:
-        name: ios-app-build
-        path: ios/App/DerivedData/Build/build/ios/*.ipa
-        
+    - name: Rinomina l'IPA in cuore-calmo.ipa
+      run: mv ios/App/DerivedData/Build/build/ios/*.ipa ios/App/DerivedData/Build/build/ios/cuore-calmo.ipa
+
     - name: Carica l'IPA su GitHub
       uses: actions/upload-artifact@v4
       with:
-        name: App-IPA
-        path: App.ipa
+        name: CuoreCalmo-IPA
+        path: ios/App/DerivedData/Build/build/ios/cuore-calmo.ipa

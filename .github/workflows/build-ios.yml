@@ -34,6 +34,9 @@ jobs:
     - name: Pulisci la cache di build
       run: rm -rf ~/Library/Developer/Xcode/DerivedData
 
+    - name: Elenca destinazioni disponibili
+      run: xcodebuild -list -workspace ios/App/App.xcodeproj/project.xcworkspace
+
     - name: Compila per Simulatore e archivia
       run: |
             xcodebuild -workspace ios/App/App.xcodeproj/project.xcworkspace -scheme App -destination 'platform=iOS Simulator,name=iPhone 16,OS=26.6' build
